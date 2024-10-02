@@ -19,10 +19,24 @@ const showCategories = (data) => {
    const categoryContainer = document.querySelector("#categories");
    data.forEach(item => {
       const {id, category} = item;
+
+      // create and show category button
       const button = document.createElement("button");
       button.classList.add("btn");
       button.innerText = category;
+      addClickHandler(button);
       categoryContainer.appendChild(button);
    });
+}
+
+const addClickHandler = (button) => {
+   button.addEventListener("click", () => {
+      const allButtons = document.querySelectorAll("button");
+      allButtons.forEach(btn => {
+         btn.classList.remove("bg-green-400", "ring-2", "ring-green-300", "ring-offset-2");
+      })
+
+      button.classList.add("bg-green-400", "ring-2", "ring-green-300", "ring-offset-2");
+   })
 }
 
