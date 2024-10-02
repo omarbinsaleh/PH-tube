@@ -33,10 +33,10 @@ const addClickHandler = (button) => {
    button.addEventListener("click", () => {
       const allButtons = document.querySelectorAll("button");
       allButtons.forEach(btn => {
-         btn.classList.remove("bg-green-400", "ring-2", "ring-green-300", "ring-offset-2");
+         btn.classList.remove("bg-green-400", "ring-1", "ring-green-400", "ring-offset-1");
       })
 
-      button.classList.add("bg-green-400", "ring-2", "ring-green-300", "ring-offset-2");
+      button.classList.add("bg-green-400", "ring-1", "ring-green-400", "ring-offset-1");
    })
 }
 
