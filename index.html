@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>PH Tube</title>
+   <!-- daisyUI and tailwindcss CDN links -->
+   <link href="https://cdn.jsdelivr.net/npm/daisyui@latest/dist/full.min.css" rel="stylesheet" type="text/css" />
+   <script src="https://cdn.tailwindcss.com"></script>
+   <!-- local css file -->
+   <link rel="stylesheet" href="./styles/base.css">
+</head>
+<body>
+   <header class="w-full max-w-[1450px] mx-auto">
+      <nav class="p-3 py-5 flex justify-between items-center gap-4 border-b-2 border-gray-100">
+         <div class="logo-container flex items-center">
+            <img class="w-full aspect-[5/2] sm:aspect-auto sm:w-[120px]" src="./assets/Logo.png" alt="">
+         </div>
+         <div class="search-container">
+            <label class="input input-bordered flex items-center gap-2">
+               <input type="text" class="grow" placeholder="Search" />
+               <svg
+                 xmlns="http://www.w3.org/2000/svg"
+                 viewBox="0 0 16 16"
+                 fill="currentColor"
+                 class="h-4 w-4 opacity-70">
+                 <path
+                   fill-rule="evenodd"
+                   d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z"
+                   clip-rule="evenodd" />
+               </svg>
+             </label>
+         </div>
+         <div class="sort-container">
+            <button class="btn">Sort</button>
+         </div>
+      </nav>
+      <nav id="categories" class="flex gap-5 items-center justify-center p-4"></nav>
+   </header>
+   <main>
+
+   </main>
+
+   <!-- local scripts files -->
+   <script src="./scripts/main.js"></script>
+</body>
+</html>
