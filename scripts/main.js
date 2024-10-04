@@ -1,13 +1,12 @@
 // when the DOM is done loading:
 document.addEventListener("DOMContentLoaded", function() {
    initApp();
-
-})
+});
 
 const initApp = () => {
    displayCategories()
    displayVideos();
-}
+};
 
 const displayCategories = () => {
    fetch("https://openapi.programming-hero.com/api/phero-tube/categories")
@@ -19,7 +18,7 @@ const displayCategories = () => {
 const showCategories = (data) => {
    const categoryContainer = document.querySelector("#categories");
 
-   // add "all category" button:
+   // add a button labeled "All" to represent all of the categories avialable:
    const btnAll = document.createElement("button");
    btnAll.dataset.categoryId = "all";
    btnAll.classList.add("btn", "bg-red-500", "text-white", "hover:bg-red-500", "hover:text-white", "duration-400", "ring-1", "ring-red-500", "ring-offset-1", "btn-category")
@@ -27,6 +26,7 @@ const showCategories = (data) => {
     addClickHandler(btnAll);
    categoryContainer.appendChild(btnAll);
 
+   // fetch data from API and display category button accordingly:
    data.forEach(item => {
       const {id, category, category_id:categoryId} = item;
 
@@ -45,7 +45,7 @@ const addClickHandler = (button) => {
       const allButtons = document.querySelectorAll(".btn-category");
       allButtons.forEach(btn => {
          btn.classList.remove("text-white", "bg-red-500", "ring-1", "ringredn-500", "ring-offset-1");
-      })
+      });
 
       // add styles for the active button:
       button.classList.add("text-white", "bg-red-500", "ring-1", "ring-red-500", "ring-offset-1");
@@ -56,15 +56,15 @@ const addClickHandler = (button) => {
       } 
       else {
          fetch(`https://openapi.programming-hero.com/api/phero-tube/category/${button.dataset.categoryId}`)
-         .then(response => response.json())
-         .then(data => {
-            console.log(data.category);
-            showVideos(data.category)
-         })
-         .catch(error => console.error(error));
-      }
+            .then(response => response.json())
+            .then(data => {
+               console.log("Videos", data.category);
+               showVideos(data.category)
+            })
+            .catch(error => console.error(error));
+      };
       
-   })
+   });
 };
 
 const displayVideos = () => {
@@ -89,7 +89,7 @@ const showVideos = (data) => {
          const {profile_picture:profilePicture, profile_name:profileName, verified} = video.authors[0];
          const {views, posted_date:publishDate} = video.others;
    
-         // create the video card:
+         // create video card for each individual video content:
          const card = document.createElement("div");
          card.classList = "card card-compact bg-base-100 w-full shadow-md rounded-none";
          card.innerHTML = `
@@ -112,10 +112,13 @@ const showVideos = (data) => {
                </div>
             </div>
          `;
+         
+         // display video in the UI:
          videoContainer.appendChild(card);
-      })
+      });
    }
    else {
+      // when there is no videos comming from API:
       videoContainer.innerHTML = `
          <div class="w-full col-span-full pt-20 flex items-center justify-center flex-col gap-5">
             <img class="w-[140px] mx-auto" src="../assets/icon.png">
@@ -124,9 +127,9 @@ const showVideos = (data) => {
                <p>☹</p>
             </div>
          </div>
-      `
-   }
-}
+      `;
+   };
+};
 
 const clearContent = (parentElement) => {
    let child = parentElement.lastElementChild;
@@ -134,6 +137,6 @@ const clearContent = (parentElement) => {
    while(child) {
       parentElement.removeChild(child);
       child = parentElement.lastElementChild;
-   }
-}
+   };
+};
 
