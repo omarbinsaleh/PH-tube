@@ -4,8 +4,36 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 const initApp = () => {
+   // add event listener:
+   const searchInputField = document.getElementById("searchInput");
+   searchInputField.addEventListener("keyup", (e) => {
+      const searchText = e.target.value;
+      // remove focus from all of the active buttons:
+      if (searchText.length > 0) {
+         removeFocuFromButtons();
+      }
+      else {
+         // set focus to the "All Category" button:
+         document.querySelector("#all-category").classList.add("text-white", "bg-red-500", "ring-1", "ring-red-500", "ring-offset-1")
+      }
+
+      // display videos based on the search text
+      displayVideos(searchText);
+   })
+
+   // display buttons for all of the available categories:
    displayCategories()
+
+   // display videos in the UI:
    displayVideos();
+};
+
+// ===================== HELPER FUNCTIONS STARTS HERE =====================//
+const removeFocuFromButtons = () => {
+   const buttons = document.querySelectorAll("button");
+   buttons.forEach(btn => {
+      btn.classList.remove("text-white", "bg-red-500", "ring-1", "ring-red-500", "ring-offset-1");
+   });
 };
 
 const displayCategories = () => {
@@ -21,6 +49,7 @@ const showCategories = (data) => {
    // add a button labeled "All" to represent all of the categories avialable:
    const btnAll = document.createElement("button");
    btnAll.dataset.categoryId = "all";
+   btnAll.id = "all-category";
    btnAll.classList.add("btn", "bg-red-500", "text-white", "hover:bg-red-500", "hover:text-white", "duration-400", "ring-1", "ring-red-500", "ring-offset-1", "btn-category")
    btnAll.innerText = "All";
     addClickHandler(btnAll);
@@ -67,8 +96,9 @@ const addClickHandler = (button) => {
    });
 };
 
-const displayVideos = () => {
-   fetch("https://openapi.programming-hero.com/api/phero-tube/videos")
+const displayVideos = (searchText) => {
+   const url = searchText === undefined ? "https://openapi.programming-hero.com/api/phero-tube/videos" : `https://openapi.programming-hero.com/api/phero-tube/videos?title=${searchText}`;
+   fetch(url)
       .then(response => response.json())
       .then(data => showVideos(data.videos))
       .catch((error) => console.error(error));
@@ -91,7 +121,7 @@ const showVideos = (data) => {
    
          // create video card for each individual video content:
          const card = document.createElement("div");
-         card.classList = "card card-compact bg-base-100 w-full shadow-md rounded-none";
+         card.classList = "card card-compact bg-base-100 w-full shadow-md rounded-none snap-always snap-center";
          card.innerHTML = `
             <figure class="rounded-tr-lg rounded-tl-lg">
                <img class="w-full aspect-[5/3]"
@@ -139,4 +169,4 @@ const clearContent = (parentElement) => {
       child = parentElement.lastElementChild;
    };
 };
-
+// ===================== HELPER FUNCTIONS END HERE =====================//
