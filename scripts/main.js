@@ -121,7 +121,7 @@ const showVideos = (data) => {
       // when there is no videos comming from API:
       videoContainer.innerHTML = `
          <div class="w-full col-span-full pt-20 flex items-center justify-center flex-col gap-5">
-            <img class="w-[140px] mx-auto" src="./assets/Icon.png">
+            <img class="w-[140px] mx-auto" src="./assets/icon.png">
             <div class="text-center">
                <p>No Videos to Display</p>
                <p>☹</p>
